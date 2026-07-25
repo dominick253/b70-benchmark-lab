@@ -1,0 +1,82 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "benchlab"
+version = "0.1.0"
+description = "B70 Benchmark Lab — Enterprise GPU Benchmarking Suite for Intel Arc Pro B70"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.12"
+authors = [
+    { name = "BenchLab Team" },
+]
+keywords = ["benchmark", "gpu", "intel-arc", "vllm", "inference", "performance"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: System :: Benchmark",
+]
+
+dependencies = [
+    "typer>=0.9.0",
+    "rich>=13.0.0",
+    "pydantic>=2.0.0",
+    "aiohttp>=3.9.0",
+    "requests>=2.31.0",
+    "psutil>=5.9.0",
+    "pyyaml>=6.0",
+    "jinja2>=3.1.0",
+    "plotly>=5.18.0",
+    "pandas>=2.1.0",
+    "polars>=0.20.0",
+    "matplotlib>=3.8.0",
+    "docker>=7.0.0",
+    "textual>=0.47.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.1.0",
+    "mypy>=1.8.0",
+    "types-requests>=2.31.0",
+    "types-psutil>=5.9.0",
+]
+
+[project.scripts]
+benchlab = "benchlab.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/example/b70-benchmark-lab"
+Documentation = "https://github.com/example/b70-benchmark-lab#readme"
+Repository = "https://github.com/example/b70-benchmark-lab"
+Issues = "https://github.com/example/b70-benchmark-lab/issues"
+
+[tool.setuptools.packages.find]
+include = ["benchlab*"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

@@ -1,0 +1,182 @@
+# B70 Benchmark Lab — Default Configuration
+#
+# This is the default configuration file.
+# Copy and modify for your specific setup.
+
+model:
+  # Model name (HuggingFace) or local path
+  name: /tmp/qwen3-0.6b
+  path: /tmp/qwen3-0.6b  # Local model path for offline use
+
+  # Data type (auto = vLLM will choose)
+  dtype: auto
+
+  # GPU memory utilization (0.0-1.0)
+  gpu_memory_utilization: 0.90
+
+  # Block size for KV cache (16, 32, 64, 128, 256)
+  block_size: 16
+
+  # Tensor parallelism (number of GPUs)
+  tensor_parallel: 1
+
+  # Maximum model context length
+  max_model_len: 8192
+
+  # Quantization (awq, bitsandbytes, gptq, compressed-tensors, fp8, fp8_e4m3, fp8_e5m2)
+  quantization: null
+
+  # KV cache data type (auto, bfloat16, float16)
+  kv_cache_dtype: auto
+
+  # Prefix caching
+  enable_prefix_caching: "on"
+
+  # Graph mode (piecewise, full, eager, disabled)
+  graph_mode: piecewise
+
+  # Chunked prefill
+  enable_chunked_prefill: true
+  max_chunked_prefill_tokens: 4096
+
+  # Number of scheduler steps
+  num_scheduler_steps: 4
+
+docker:
+  # Docker image
+  image: intel/llm-scaler-vllm
+  image_tag: 0.21.0-b1
+
+  # GPU count
+  gpus: 1
+
+  # CPU count
+  cpus: "8"
+
+  # Memory limits
+  memory: 32G
+  memory_swap: 32G
+
+  # Shared memory (important for multi-GPU)
+  shm_size: 8G
+
+  # API port
+  port: 8000
+
+  # Network
+  network: host
+
+  # Container settings
+  pull_image: true
+  remove_container: true
+  restart_policy: "no"
+  container_name_prefix: benchlab
+
+  # Environment variables
+  env_vars:
+    VLLM_ALLOW_RUNTIME_LORA_UPDATING: "True"
+
+workload:
+  # Number of concurrent requests
+  concurrency: 4
+
+  # Number of prompts per workload
+  num_prompts: 10
+
+  # Request timeout (seconds)
+  timeout: 60
+
+  # Retry attempts
+  retries: 3
+
+  # Workloads to test
+  workloads:
+    - reasoning
+    - coding
+    - creative_writing
+    - math
+    - tool_calling
+    - rag
+    - conversation
+
+  # Lengths to test
+  lengths:
+    - short
+    - medium
+    - long
+
+scoring:
+  # Performance weights
+  peak_tps_weight: 0.15
+  average_tps_weight: 0.15
+  p95_tps_weight: 0.10
+  min_tps_weight: 0.05
+  ttft_weight: 0.10
+  latency_weight: 0.10
+
+  # Efficiency weights
+  gpu_util_weight: 0.05
+  power_efficiency_weight: 0.05
+  vram_efficiency_weight: 0.05
+
+  # Stability weights
+  stability_weight: 0.10
+  long_context_stability_weight: 0.05
+  scheduler_efficiency_weight: 0.05
+  graph_stability_weight: 0.05
+
+  # Penalties
+  corruption_penalty: 0.10
+  oom_penalty: 0.50
+  crash_penalty: 0.50
+  memory_growth_penalty: 0.10
+
+corruption:
+  enabled: true
+
+  # Detection thresholds
+  max_repeated_tokens: 10
+  max_repeated_chars: 20
+  max_repeated_lines: 5
+  max_generation_tokens: 8192
+
+  # Detection toggles
+  detect_empty_generation: true
+  detect_invalid_utf: true
+  detect_unicode_corruption: true
+  detect_broken_json: true
+  detect_nan: true
+  detect_partial_generation: true
+  detect_eos_failure: true
+  detect_infinite_loop: true
+  detect_runaway_generation: true
+  detect_hallucinated_binary: true
+
+storage:
+  # SQLite database path
+  path: results/benchlab.db
+
+telemetry:
+  # Collection interval (seconds)
+  collection_interval: 1.0
+
+  # Intel GPU telemetry
+  collect_gpu: true
+
+  # System telemetry
+  collect_system: true
+
+  # Docker stats
+  collect_docker: true
+
+  # vLLM metrics
+  collect_vllm: true
+
+paths:
+  results_dir: results
+  reports_dir: reports
+  logs_dir: logs
+  configs_dir: configs
+  templates_dir: templates
+
+max_configs: 100

@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+venv/
+.venv/
+env/
+.env/
+
+# Results and data (keep structure, ignore content)
+results/*.db
+results/*.json
+results/*.csv
+results/*.parquet
+reports/*.json
+reports/*.csv
+reports/*.md
+reports/html/
+logs/
+
+# Docker
+.docker/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Config secrets
+configs/secrets.yaml
+configs/*.secret.yaml
