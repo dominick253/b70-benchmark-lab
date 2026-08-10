@@ -26,6 +26,9 @@ from pathlib import Path
 from typing import Any, Optional
 
 from benchlab.utils import ensure_dir, generate_id, timestamp
+from benchlab.logging import get_logger
+
+logger = get_logger("storage")
 
 
 class Storage:
@@ -258,8 +261,10 @@ class Storage:
 
     def save_run(self, run_data: dict[str, Any]) -> str:
         """Save a complete benchmark run result."""
-        run_id = run_data.get("run_id", f"run-{generate_id()}")
-        config_hash = run_data.get("config_hash", "")
+        run_id = run_data.get("run_id")
+        if not run_id:
+            run_id = f"run-{generate_id()}"
+        config_hash = run_data.get("config_hash", "unknown")
         status = run_data.get("status", "unknown")
         duration = run_data.get("duration", 0)
         start_time = run_data.get("start_time", 0)
@@ -287,6 +292,23 @@ class Storage:
                 ))
         if metric_records:
             self.record_metrics_batch(metric_records)
+
+        # Save corruption events to DB (handle both dict and CorruptionEvent objects)
+        if corruption_events:
+            for evt in corruption_events:
+                if hasattr(evt, "to_dict"):
+                    evt = evt.to_dict()
+                self.save_corruption_event(
+                    run_id=run_id,
+                    config_id=config_id,
+                    benchmark_id=f"bench-{run_id}",
+                    event_type=evt.get("corruption_type", "unknown"),
+                    severity=evt.get("severity", "high"),
+                    timestamp_val=evt.get("timestamp", 0),
+                    prompt=evt.get("prompt", ""),
+                    output=evt.get("output", ""),
+                    evidence=evt.get("evidence", ""),
+                )
 
         # Store score
         self.set_config_score(config_id, score)
@@ -373,6 +395,37 @@ class Storage:
             (run_id, limit),
         ).fetchall()
         return [dict(row) for row in rows]
+
+    def save_corruption_event(
+        self,
+        run_id: str,
+        config_id: str,
+        benchmark_id: str,
+        event_type: str,
+        severity: str,
+        timestamp_val: float,
+        prompt: str,
+        output: str,
+        evidence: str,
+    ) -> None:
+        """Save a corruption event to the database."""
+        with self._transaction() as conn:
+            conn.execute(
+                """INSERT INTO corruption_events (id, benchmark_id, config_id, run_id, event_type, severity, timestamp, prompt, output, evidence)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                (
+                    f"corr-{run_id}-{generate_id()}",
+                    benchmark_id,
+                    config_id,
+                    run_id,
+                    event_type,
+                    severity,
+                    timestamp(),
+                    prompt[:5000],
+                    output[:5000],
+                    evidence[:5000],
+                ),
+            )
 
     # ------------------------------------------------------------------
     # Benchmarks

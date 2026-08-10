@@ -90,6 +90,9 @@ class CorruptionDetector:
         if not self.config.enabled:
             return events
 
+        # Extract prompt type from context or output
+        prompt_type = (context or {}).get("workload", "unknown")
+
         # Run all enabled checks
         checks = [
             (self.config.detect_empty_generation, self._check_empty),

@@ -5,8 +5,8 @@
 
 model:
   # Model name (HuggingFace) or local path
-  name: /tmp/qwen3-0.6b
-  path: /tmp/qwen3-0.6b  # Local model path for offline use
+  name: /home/dom/.cache/huggingface/hub/models--Qwen--Qwen3.6-35B-A3B/snapshots/995ad96eacd98c81ed38be0c5b274b04031597b0
+  path: /home/dom/.cache/huggingface/hub/models--Qwen--Qwen3.6-35B-A3B/snapshots/995ad96eacd98c81ed38be0c5b274b04031597b0  # Local path for offline use
 
   # Data type (auto = vLLM will choose)
   dtype: auto
@@ -18,7 +18,7 @@ model:
   block_size: 16
 
   # Tensor parallelism (number of GPUs)
-  tensor_parallel: 1
+  tensor_parallel: 2
 
   # Maximum model context length
   max_model_len: 8192

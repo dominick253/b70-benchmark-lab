@@ -224,7 +224,21 @@ class PromptGenerator:
             task = self._rng.choice(self.CODING_TASKS)
             lang = self._rng.choice(self.CODING_LANGUAGES)
             template = self._rng.choice(self.CODING_PROMPTS)
-            text = template.format(task=task, language=lang)
+            text = template.format(
+                task=task,
+                language=lang,
+                interface="an iterable collection",
+                data_source="a CSV file",
+                format="JSON",
+                pattern="singleton",
+                use_case="configuration management",
+                operation="create and retrieve resources",
+                schema_change="adding a new user table",
+                algorithm="binary search",
+                concurrency_task="share data between threads",
+                cli_task="process files from the command line",
+                middleware_task="log requests and responses",
+            )
 
             expected_lengths = {
                 WorkloadLength.SHORT: 500,
