@@ -30,11 +30,7 @@ Enterprise GPU Benchmarking Suite for Intel Arc Pro B70.
 | `results/` | Repository area. Inspect its files and local documentation before editing. |
 | `tests/` | Automated tests. |
 | `README.md` | Root project file or artifact. |
-| `benchlab/` | Repository area. Inspect its files and local documentation before editing. |
-| `configs/` | Repository area. Inspect its files and local documentation before editing. |
 | `pyproject.toml` | Root project file or artifact. |
-| `results/` | Repository area. Inspect its files and local documentation before editing. |
-| `tests/` | Automated tests. |
 
 ## Scoped Contracts
 
