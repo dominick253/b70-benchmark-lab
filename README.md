@@ -49,67 +49,9 @@ BenchLab is a comprehensive GPU benchmarking suite designed for Intel Arc Pro B7
 
 ## 🏗️ Architecture
 
-```mermaid
-graph TB
-    subgraph "CLI Layer"
-        CLI[Typer CLI<br/>benchlab CLI]
-    end
+![benchlab core execution path](diagrams/b70-lab-core.png)
 
-    subgraph "Core Engine"
-        Runner[Workload Runner]
-        Scheduler[Task Scheduler]
-        Config[Configuration Parser]
-        Validator[Input Validator]
-    end
-
-    subgraph "Benchmark Modules"
-        Bench[LLM Benchmark<br/>vLLM/llama.cpp]
-        Metrics[Metrics Collector<br/>GPU/VRAM/CPU]
-        Storage[Results Storage]
-        Scoring[Performance Scoring]
-        Telemetry[Telemetry Logger]
-    end
-
-    subgraph "Reporting"
-        Dashboard[HTML Dashboard<br/>Jinja2 + Plotly]
-        Graphs[Visual Charts<br/>Matplotlib/Plotly]
-        Report[Final Report Generation]
-    end
-
-    subgraph "Infrastructure"
-        Docker[Docker Manager]
-        IntelGPU[Intel GPU Utils<br/>intel_gpu_top]
-        DockerStats[Docker Stats]
-        Corruption[Data Corruption Tester]
-    end
-
-    CLI --> Runner
-    CLI --> Config
-    CLI --> Dashboard
-
-    Runner --> Scheduler
-    Runner --> Bench
-    Runner --> Metrics
-    Runner --> Storage
-    Runner --> Scoring
-    Runner --> Telemetry
-
-    Bench --> Scheduler
-    Bench --> Docker
-    Bench --> IntelGPU
-
-    Metrics --> IntelGPU
-    Metrics --> DockerStats
-
-    Config --> Validator
-    Config --> Config
-
-    Storage --> Dashboard
-    Scoring --> Report
-    Telemetry --> Graphs
-    Graphs --> Dashboard
-    Dashboard --> Report
-```
+Interactive, brand-styled version: [open the SVG](diagrams/b70-lab-core.html).
 
 ### Layer Diagram
 
