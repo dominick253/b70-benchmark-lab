@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>benchlab core execution path</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Serif:ital@0;1&family=Noto+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400&family=Noto+Sans+TC:wght@400;500;600&family=Noto+Serif+TC:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #f5f5f5;
+      --color-ink:     #2d3142;
+      --color-muted:   #4f5d75;
+      --color-accent:  #bf4520;
+      --font-sans:     'Geist', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', serif;
+      --font-mono:     'Geist Mono', ui-monospace, monospace;
+    }
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 3rem 2rem;
+    }
+    .frame { max-width: 1120px; width: 100%; }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: 0.66rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--color-muted); margin-bottom: 0.5rem;
+    }
+    h1 {
+      font-family: var(--font-serif); font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem);
+      font-weight: 400; letter-spacing: -0.02em; line-height: 1.15;
+      color: var(--color-ink); margin-bottom: 1.5rem;
+    }
+    .svgwrap { overflow-x: auto; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Core execution path</p>
+    <h1>benchlab core execution path</h1>
+    <div class="svgwrap">
+<svg viewBox="0 0 1120 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="b70-lab-core-title b70-lab-core-desc">
+<title id="b70-lab-core-title">benchlab core execution path</title>
+<desc id="b70-lab-core-desc">The CLI drives the workload runner, which schedules tasks and launches LLM benchmarks and metric collection against Docker and the GPU. Collected metrics feed storage, then scoring, the dashboard, and the final report; the config parser feeds the runner.</desc>
+  <defs>
+    <pattern id="b70-lab-core-dots" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.9" fill="rgba(45,49,66,0.1)"/>
+    </pattern>
+    <marker id="b70-lab-core-arrow" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0, 9 3.5, 0 7" fill="#4f5d75"/></marker>
+    <marker id="b70-lab-core-arrow-accent" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0, 9 3.5, 0 7" fill="#bf4520"/></marker>
+    <marker id="b70-lab-core-arrow-link" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0, 9 3.5, 0 7" fill="#2e5aa8"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#f5f5f5"/>
+  <rect width="100%" height="100%" fill="url(#b70-lab-core-dots)" opacity="0.5"/>
+  <rect x="40" y="88" width="196" height="200" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.1)" stroke-width="0.8"/>
+  <rect x="52" y="98" width="104" height="14" rx="2" fill="#f5f5f5"/>
+  <text x="103.2" y="109" fill="rgba(45,49,66,0.55)" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.14em">CLI + CONFIG</text>
+  <rect x="288" y="64" width="760" height="252" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.1)" stroke-width="0.8"/>
+  <rect x="300" y="74" width="144" height="14" rx="2" fill="#f5f5f5"/>
+  <text x="372.8" y="85" fill="rgba(45,49,66,0.55)" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.14em">ENGINE + BENCHMARK</text>
+  <rect x="288" y="320" width="510" height="216" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.1)" stroke-width="0.8"/>
+  <rect x="300" y="330" width="80" height="14" rx="2" fill="#f5f5f5"/>
+  <text x="340.4" y="341" fill="rgba(45,49,66,0.55)" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.14em">REPORTING</text>
+  <path d="M 220 132.0 L 320 132.0" fill="none" stroke="#bf4520" stroke-width="1.5" marker-end="url(#b70-lab-core-arrow-accent)"/>
+  <path d="M 220 244 L 228.0 244.0 Q 270 244 270.0 252.0 L 270.0 236.0 Q 270 140 262.0 140.0 L 320 140" fill="none" stroke="#4f5d75" stroke-width="1.1" marker-end="url(#b70-lab-core-arrow-muted)"/>
+  <path d="M 420.0 164 L 420.0 220" fill="none" stroke="#4f5d75" stroke-width="1.1" marker-end="url(#b70-lab-core-arrow-muted)"/>
+  <path d="M 520 132.0 L 580 132.0" fill="none" stroke="#4f5d75" stroke-width="1.1" marker-end="url(#b70-lab-core-arrow-muted)"/>
+  <path d="M 520 156 L 528.0 156.0 Q 550 156 550.0 148.0 L 550.0 164.0 Q 550 252 542.0 252.0 L 580 252" fill="none" stroke="#4f5d75" stroke-width="1.1" marker-end="url(#b70-lab-core-arrow-muted)"/>
+  <path d="M 780 132.0 L 840 132.0" fill="none" stroke="#4f5d75" stroke-width="1.1" marker-end="url(#b70-lab-core-arrow-muted)"/>
+  <path d="M 780 252.0 L 840 252.0" fill="none" stroke="#4f5d75" stroke-width="1.1" marker-end="url(#b70-lab-core-arrow-muted)"/>
+  <path d="M 680.0 284 L 680.0 340" fill="none" stroke="#4f5d75" stroke-width="1.1" marker-end="url(#b70-lab-core-arrow-muted)"/>
+  <path d="M 780 372.0 L 320 372.0" fill="none" stroke="#bf4520" stroke-width="1.5" marker-end="url(#b70-lab-core-arrow-accent)"/>
+  <path d="M 420.0 404 L 420.0 460" fill="none" stroke="#4f5d75" stroke-width="1.1" marker-end="url(#b70-lab-core-arrow-muted)"/>
+  <path d="M 520 492.0 L 580 492.0" fill="none" stroke="#bf4520" stroke-width="1.5" marker-end="url(#b70-lab-core-arrow-accent)"/>
+  <rect x="60" y="100" width="160" height="64" rx="6" fill="#f5f5f5"/>
+  <rect x="60" y="100" width="160" height="64" rx="6" fill="rgba(191,69,32,0.08)" stroke="#bf4520" stroke-width="1"/>
+  <rect x="68" y="108" width="24" height="12" rx="2" fill="transparent" stroke="rgba(191,69,32,0.5)" stroke-width="0.8"/>
+  <text x="80.8" y="117" fill="#5a6580" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">CLI</text>
+  <text x="140.0" y="134.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Typer CLI</text>
+  <text x="140.0" y="148.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">benchlab</text>
+  <rect x="60" y="220" width="160" height="64" rx="6" fill="#f5f5f5"/>
+  <rect x="60" y="220" width="160" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <rect x="68" y="228" width="24" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.5)" stroke-width="0.8"/>
+  <text x="80.8" y="237" fill="#5a6580" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">CFG</text>
+  <text x="140.0" y="254.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Config parser</text>
+  <text x="140.0" y="268.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">+ validator</text>
+  <rect x="320" y="100" width="200" height="64" rx="6" fill="#f5f5f5"/>
+  <rect x="320" y="100" width="200" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <rect x="328" y="108" width="32" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.5)" stroke-width="0.8"/>
+  <text x="343.4" y="117" fill="#5a6580" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">CORE</text>
+  <text x="420.0" y="134.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Workload runner</text>
+  <text x="420.0" y="148.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">orchestrator</text>
+  <rect x="320" y="220" width="200" height="64" rx="6" fill="#f5f5f5"/>
+  <rect x="320" y="220" width="200" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <rect x="328" y="228" width="32" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.5)" stroke-width="0.8"/>
+  <text x="343.4" y="237" fill="#5a6580" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">CORE</text>
+  <text x="420.0" y="254.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Task scheduler</text>
+  <text x="420.0" y="268.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">queue</text>
+  <rect x="580" y="100" width="200" height="64" rx="6" fill="#f5f5f5"/>
+  <rect x="580" y="100" width="200" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <rect x="588" y="108" width="36" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.5)" stroke-width="0.8"/>
+  <text x="606.0" y="117" fill="#5a6580" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">BENCH</text>
+  <text x="680.0" y="134.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">LLM benchmark</text>
+  <text x="680.0" y="148.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">vLLM / llama.cpp</text>
+  <rect x="580" y="220" width="200" height="64" rx="6" fill="#f5f5f5"/>
+  <rect x="580" y="220" width="200" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <rect x="588" y="228" width="24" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.5)" stroke-width="0.8"/>
+  <text x="600.8" y="237" fill="#5a6580" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">MET</text>
+  <text x="680.0" y="254.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Metrics collector</text>
+  <text x="680.0" y="268.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">GPU / VRAM / CPU</text>
+  <rect x="840" y="100" width="160" height="64" rx="6" fill="#f5f5f5"/>
+  <rect x="840" y="100" width="160" height="64" rx="6" fill="rgba(45,49,66,0.03)" stroke="rgba(45,49,66,0.3)" stroke-width="1"/>
+  <rect x="848" y="108" width="36" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.5)" stroke-width="0.8"/>
+  <text x="866.0" y="117" fill="#5a6580" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">INFRA</text>
+  <text x="920.0" y="134.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Docker manager</text>
+  <text x="920.0" y="148.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">containers</text>
+  <rect x="840" y="220" width="160" height="64" rx="6" fill="#f5f5f5"/>
+  <rect x="840" y="220" width="160" height="64" rx="6" fill="rgba(45,49,66,0.03)" stroke="rgba(45,49,66,0.3)" stroke-width="1"/>
+  <rect x="848" y="228" width="24" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.5)" stroke-width="0.8"/>
+  <text x="860.8" y="237" fill="#5a6580" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">GPU</text>
+  <text x="920.0" y="254.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">intel_gpu_top</text>
+  <text x="920.0" y="268.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">+ docker stats</text>
+  <rect x="580" y="340" width="200" height="64" rx="6" fill="#f5f5f5"/>
+  <rect x="580" y="340" width="200" height="64" rx="6" fill="rgba(45,49,66,0.05)" stroke="#4f5d75" stroke-width="1"/>
+  <rect x="588" y="348" width="20" height="12" rx="2" fill="transparent" stroke="rgba(79,93,117,0.5)" stroke-width="0.8"/>
+  <text x="598.2" y="357" fill="#5a6580" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">DB</text>
+  <text x="680.0" y="374.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Results storage</text>
+  <text x="680.0" y="388.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">persistence</text>
+  <rect x="320" y="340" width="200" height="64" rx="6" fill="#f5f5f5"/>
+  <rect x="320" y="340" width="200" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <rect x="328" y="348" width="36" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.5)" stroke-width="0.8"/>
+  <text x="346.0" y="357" fill="#5a6580" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">SCORE</text>
+  <text x="420.0" y="374.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Performance scoring</text>
+  <text x="420.0" y="388.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">normalize</text>
+  <rect x="320" y="460" width="200" height="64" rx="6" fill="#f5f5f5"/>
+  <rect x="320" y="460" width="200" height="64" rx="6" fill="rgba(45,49,66,0.05)" stroke="#4f5d75" stroke-width="1"/>
+  <rect x="328" y="468" width="20" height="12" rx="2" fill="transparent" stroke="rgba(79,93,117,0.5)" stroke-width="0.8"/>
+  <text x="338.2" y="477" fill="#5a6580" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">UI</text>
+  <text x="420.0" y="494.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">HTML dashboard</text>
+  <text x="420.0" y="508.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Jinja2 + Plotly</text>
+  <rect x="580" y="460" width="200" height="64" rx="6" fill="#f5f5f5"/>
+  <rect x="580" y="460" width="200" height="64" rx="6" fill="rgba(45,49,66,0.05)" stroke="#4f5d75" stroke-width="1"/>
+  <rect x="588" y="468" width="24" height="12" rx="2" fill="transparent" stroke="rgba(79,93,117,0.5)" stroke-width="0.8"/>
+  <text x="600.8" y="477" fill="#5a6580" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">OUT</text>
+  <text x="680.0" y="494.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Final report</text>
+  <text x="680.0" y="508.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">generation</text>
+  <line x1="40" y1="508" x2="1080" y2="508" stroke="rgba(45,49,66,0.1)" stroke-width="0.8"/>
+  <text x="40" y="524" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.18em">LEGEND</text>
+  <rect x="40" y="539" width="14" height="10" rx="2" fill="rgba(191,69,32,0.08)" stroke="#bf4520" stroke-width="1"/>
+  <text x="74" y="547" fill="#4f5d75" font-size="9" font-family="'Geist', sans-serif">CLI</text>
+  <rect x="116.6" y="539" width="14" height="10" rx="2" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <text x="150.6" y="547" fill="#4f5d75" font-size="9" font-family="'Geist', sans-serif">Engine / benchmark</text>
+  <rect x="286.20000000000005" y="539" width="14" height="10" rx="2" fill="rgba(45,49,66,0.03)" stroke="rgba(45,49,66,0.3)" stroke-width="1"/>
+  <text x="320.20000000000005" y="547" fill="#4f5d75" font-size="9" font-family="'Geist', sans-serif">Infra</text>
+  <rect x="375.20000000000005" y="539" width="14" height="10" rx="2" fill="rgba(45,49,66,0.05)" stroke="#4f5d75" stroke-width="1"/>
+  <text x="409.20000000000005" y="547" fill="#4f5d75" font-size="9" font-family="'Geist', sans-serif">Data / output</text>
+  <line x1="513.8000000000001" y1="544" x2="541.8000000000001" y2="544" stroke="#bf4520" stroke-width="1.4" marker-end="url(#b70-lab-core-arrow-accent)"/>
+  <text x="547.8000000000001" y="547" fill="#4f5d75" font-size="9" font-family="'Geist', sans-serif">Result flow</text>
+</svg>
+    </div>
+  </div>
+</body>
+</html>
